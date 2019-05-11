@@ -1,12 +1,8 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace AzureFunctionAppWithDIAndScrutor
 {
@@ -21,8 +17,7 @@ namespace AzureFunctionAppWithDIAndScrutor
 
         [FunctionName("SimpleFunction")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
             service.DoSomething();
             return new OkObjectResult(new { hello = "injection"});
